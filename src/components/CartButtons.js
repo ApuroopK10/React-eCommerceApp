@@ -12,7 +12,7 @@ const CartButtons = () => {
       <Link to="/cart" className="cart-btn">
         Cart
         <span className="cart-container">
-          {<FaShoppingCart />}
+          <FaShoppingCart />
           <span className="cart-value">3</span>
         </span>
       </Link>
