@@ -9,28 +9,40 @@ import CartButtons from "./CartButtons";
 import { useUserContext } from "../context/user_context";
 
 const Sidebar = () => {
-  const isOpen = false;
+  const { isSidebarOpen, closeSideBar } = useProductsContext();
+
   return (
     <SidebarContainer>
-      <aside className={`${isOpen ? "sidebar show-sidebar" : "sidebar"}`}>
+      <aside
+        className={`${isSidebarOpen ? "sidebar show-sidebar" : "sidebar"}`}
+      >
         <div className="sidebar-header">
-          <img className="logo" src={homeSpace} alt="HomeSpace" />
-          <button type="button" className="close-btn">
+          <img
+            className="logo"
+            src={homeSpace}
+            alt="HomeSpace"
+            onClick={closeSideBar}
+          />
+          <button type="button" className="close-btn" onClick={closeSideBar}>
             <FaTimes />
           </button>
         </div>
-      </aside>
-      <ul className="links">
-        {links.map((link) => (
-          <li key={link.id}>
-            <Link to={link.url}>{link.text}</Link>
+        <ul className="links">
+          {links.map((link) => (
+            <li key={link.id}>
+              <Link to={link.url} onClick={closeSideBar}>
+                {link.text}
+              </Link>
+            </li>
+          ))}
+          <li>
+            <Link to="/checkout" onClick={closeSideBar}>
+              Checkout
+            </Link>
           </li>
-        ))}
-        <li>
-          <Link to="/checkout">Checkout</Link>
-        </li>
-      </ul>
-      <CartButtons />
+        </ul>
+        <CartButtons />
+      </aside>
     </SidebarContainer>
   );
 };
