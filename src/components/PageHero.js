@@ -5,9 +5,9 @@ const PageHero = ({ title }) => {
   return (
     <Wrapper>
       <div className="section-center">
-        <h3>
+        <h5>
           <Link to="/">Home</Link>/ {title}
-        </h3>
+        </h5>
       </div>
     </Wrapper>
   );
@@ -16,7 +16,7 @@ const PageHero = ({ title }) => {
 const Wrapper = styled.section`
   background: var(--clr-primary-10);
   width: 100%;
-  min-height: 20vh;
+  min-height: 10vh;
   display: flex;
   align-items: center;
 
