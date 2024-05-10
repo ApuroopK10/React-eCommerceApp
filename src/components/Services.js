@@ -22,11 +22,11 @@ const Services = () => {
           {services.map((service) => {
             const { id, icon, title, text } = service;
             return (
-              <artile className="service" key={id}>
+              <article className="service" key={id}>
                 <span className="icon">{icon}</span>
                 <h3>{title}</h3>
                 <p>{text}</p>
-              </artile>
+              </article>
             );
           })}
         </div>
