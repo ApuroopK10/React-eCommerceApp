@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useProductsContext } from "../context/products_context";
 import { single_product_url as url } from "../utils/constants";
 import { formatPrice } from "../utils/helpers";
@@ -15,12 +15,30 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const SingleProductPage = () => {
-  const { fetchSingleProduct } = useProductsContext();
+  const {
+    single_product_loading: loading,
+    single_product: product,
+    single_product_error: error,
+    fetchSingleProduct,
+  } = useProductsContext();
   const { id } = useParams();
+  const navigate = useNavigate();
   useEffect(() => {
     fetchSingleProduct(url + id);
-  }, []);
-  return <h4>single product page</h4>;
+  }, [id]);
+
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+    }
+  }, [error]);
+  return (
+    <Wrapper>
+      {loading ? <Loading /> : error ? <Error /> : <h1>Single Product</h1>}
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.main`
