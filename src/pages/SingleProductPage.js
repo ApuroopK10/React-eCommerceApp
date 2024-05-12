@@ -59,29 +59,31 @@ const SingleProductPage = () => {
         <Link to="/products" className="btn">
           Back to Products
         </Link>
-        <div className="product-center">
-          <section>{images && <ProductImages images={images} />}</section>
-          <section className="content">
-            <h2>{name}</h2>
-            <Stars />
-            <h5 className="price">{formatPrice(price)}</h5>
-            <p className="desc">{description}</p>
-            <p className="info">
-              <span>Available: </span>
-              {stock > 0 ? "In Stock" : "Out of Stock"}
-            </p>
-            <p className="info">
-              <span>SKU: </span>
-              {sku}
-            </p>
-            <p className="info">
-              <span>Brand: </span>
-              {company}
-            </p>
-            <hr />
-            {stock > 0 && <AddToCart />}
-          </section>
-        </div>
+        {product && (
+          <div className="product-center">
+            <section>{images && <ProductImages images={images} />}</section>
+            <section className="content">
+              <h2>{name}</h2>
+              <Stars rating={stars} reviews={reviews} />
+              <h5 className="price">{formatPrice(price)}</h5>
+              <p className="desc">{description}</p>
+              <p className="info">
+                <span>Available: </span>
+                {stock > 0 ? "In Stock" : "Out of Stock"}
+              </p>
+              <p className="info">
+                <span>SKU: </span>
+                {sku}
+              </p>
+              <p className="info">
+                <span>Brand: </span>
+                {company}
+              </p>
+              <hr />
+              {stock > 0 && <AddToCart />}
+            </section>
+          </div>
+        )}
       </div>
     </Wrapper>
   );
