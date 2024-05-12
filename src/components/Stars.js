@@ -2,55 +2,24 @@ import React from "react";
 import styled from "styled-components";
 import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
 const Stars = ({ rating, reviews }) => {
-  const ratings = [];
-  if (rating % 5 === 0) {
-    for (let i = 0; i < 5; i++) {
-      ratings.push(
-        parseInt(rating) === 0 ? (
-          <span key={i + "empty"}>
-            <BsStar />
-          </span>
-        ) : (
-          <span key={i + "full"}>
-            <BsStarFill />
-          </span>
-        )
-      );
-    }
-  } else {
-    for (let i = 0; i < Math.floor(rating); i++) {
-      ratings.push(
-        <span key={i}>
+  const renderStars = Array.from({ length: 5 }, (ele, index) => {
+    return (
+      <span key={index}>
+        {rating >= index + 1 ? (
           <BsStarFill />
-        </span>
-      );
-    }
-    if (rating - Math.floor(rating) >= 0.5) {
-      ratings.push(
-        <span key={rating - Math.floor(rating)}>
+        ) : rating >= index + 0.5 ? (
           <BsStarHalf />
-        </span>
-      );
-    } else {
-      ratings.push(
-        <span key={rating - Math.floor(rating)}>
+        ) : (
           <BsStar />
-        </span>
-      );
-    }
-    for (let i = Math.ceil(rating); i < 5; i++) {
-      ratings.push(
-        <span key={i}>
-          <BsStar />
-        </span>
-      );
-    }
-  }
+        )}
+      </span>
+    );
+  });
 
   return (
     <Wrapper>
       <div className="stars">
-        <span>{ratings}</span>
+        <span>{renderStars}</span>
       </div>
       <p className="reviews">({reviews} customer reviews)</p>
     </Wrapper>
