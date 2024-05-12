@@ -7,6 +7,19 @@ import AmountButtons from "./AmountButtons";
 
 const AddToCart = ({ stock, id, colors }) => {
   const [activeColor, setActiveColor] = useState(colors[0]);
+  const [quantity, setQuantity] = useState(1);
+  const addQuantity = () => {
+    if (quantity === stock) {
+      return;
+    }
+    setQuantity(quantity + 1);
+  };
+  const reduceQuantity = () => {
+    if (quantity === 1) {
+      return;
+    }
+    setQuantity(quantity - 1);
+  };
   return (
     <Wrapper>
       <div className="colors">
@@ -24,6 +37,14 @@ const AddToCart = ({ stock, id, colors }) => {
           ))}
         </div>
       </div>
+      <div className="btn-container">
+        <AmountButtons
+          quantity={quantity}
+          plusQuantity={addQuantity}
+          minusQuantity={reduceQuantity}
+        />
+      </div>
+      <button className="btn">Add to Cart</button>
     </Wrapper>
   );
 };
@@ -52,7 +73,7 @@ const Wrapper = styled.section`
     margin-right: 0.5rem;
     border: none;
     cursor: pointer;
-    opacity: 0.5;
+    opacity: 0.8;
     display: flex;
     align-items: center;
     justify-content: center;
