@@ -17,6 +17,16 @@ const initialState = {
   all_products: [],
   grid_view: true,
   sort: "price-lowest",
+  filters: {
+    text: "",
+    company: "all",
+    category: "all",
+    color: "all",
+    min_price: 0,
+    max_price: 0,
+    price: 0,
+    shipping: false,
+  },
 };
 
 const FilterContext = React.createContext();
@@ -49,8 +59,33 @@ export const FilterProvider = ({ children }) => {
       payload: e.target.value,
     });
   };
+
+  const updateFilters = (e) => {
+    dispatch({
+      type: UPDATE_FILTERS,
+      payload: {
+        name: e.target.name,
+        value: e.target.value,
+      },
+    });
+    dispatch({
+      type: FILTER_PRODUCTS,
+      payload: {
+        name: e.target.name,
+        value: e.target.value,
+      },
+    });
+  };
+
+  const clearFilters = () => {
+    dispatch({
+      type: CLEAR_FILTERS,
+    });
+  };
   return (
-    <FilterContext.Provider value={{ ...state, setView, updateSort }}>
+    <FilterContext.Provider
+      value={{ ...state, setView, updateSort, updateFilters, clearFilters }}
+    >
       {children}
     </FilterContext.Provider>
   );

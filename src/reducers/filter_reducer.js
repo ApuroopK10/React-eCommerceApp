@@ -11,10 +11,13 @@ import {
 
 const filter_reducer = (state, action) => {
   if (action.type === LOAD_PRODUCTS) {
+    // let maxPrice = Math.max(...action.payload.map((prod) => prod.price));
+    let maxPrice = action.payload.sort((a, b) => b.price - a.price)[0]?.price;
     return {
       ...state,
       all_products: [...action.payload],
       filtered_products: [...action.payload],
+      filters: { ...state.filters, max_price: maxPrice, price: maxPrice },
     };
   }
 
@@ -60,6 +63,29 @@ const filter_reducer = (state, action) => {
         break;
     }
     return { ...state, filtered_products: sortProducts };
+  }
+
+  if (action.type === UPDATE_FILTERS) {
+    const { name, value } = action.payload;
+    const filter = {};
+    filter[name] = value;
+    return {
+      ...state,
+      filters: { ...state.filters, ...filter },
+    };
+  }
+  if (action.type === FILTER_PRODUCTS) {
+    const { name, value } = action.payload;
+    let temp_products = [...state.all_products];
+    if (name === "text") {
+      temp_products = temp_products.filter(
+        (prod) => prod.name.toLowerCase().indexOf(value.toLowerCase()) > -1
+      );
+    }
+    return {
+      ...state,
+      filtered_products: temp_products,
+    };
   }
   throw new Error(`No Matching "${action.type}" - action type`);
 };
