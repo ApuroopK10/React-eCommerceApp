@@ -61,18 +61,32 @@ export const FilterProvider = ({ children }) => {
   };
 
   const updateFilters = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    if (name === "category") {
+      value = e.target.textContent;
+    }
+    if (name === "color") {
+      value = e.target.dataset.color;
+    }
+    if (name === "price") {
+      value = Number(value);
+    }
+    if (name === "shipping") {
+      value = e.target.checked;
+    }
     dispatch({
       type: UPDATE_FILTERS,
       payload: {
-        name: e.target.name,
-        value: e.target.value,
+        name,
+        value,
       },
     });
     dispatch({
       type: FILTER_PRODUCTS,
       payload: {
-        name: e.target.name,
-        value: e.target.value,
+        name,
+        value,
       },
     });
   };

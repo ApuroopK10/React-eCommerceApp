@@ -6,4 +6,10 @@ export const formatPrice = (num) => {
   return newNum;
 };
 
-export const getUniqueValues = () => {};
+export const getUniqueValues = (products, property) => {
+  let propArray = products.map((product) => product[property]);
+  if (property === "colors") {
+    propArray = propArray.flat();
+  }
+  return ["all", ...new Set(propArray)];
+};
