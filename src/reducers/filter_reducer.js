@@ -75,16 +75,16 @@ const filter_reducer = (state, action) => {
     };
   }
   if (action.type === FILTER_PRODUCTS) {
-    const { name, value } = action.payload;
-    let temp_products = [...state.all_products];
-    if (name === "text") {
-      temp_products = temp_products.filter(
-        (prod) => prod.name.toLowerCase().indexOf(value.toLowerCase()) > -1
-      );
-    }
+    // const { name, value } = action.payload;
+    // let temp_products = [...state.all_products];
+    // // if (name === "text") {
+    // temp_products = temp_products.filter(
+    //   (prod) => prod[name].toLowerCase().indexOf(value.toLowerCase()) > -1
+    // );
+    // }
     return {
       ...state,
-      filtered_products: temp_products,
+      // filtered_products: temp_products,
     };
   }
   if (action.type === CLEAR_FILTERS) {

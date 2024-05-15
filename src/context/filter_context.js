@@ -43,9 +43,12 @@ export const FilterProvider = ({ children }) => {
 
   useEffect(() => {
     dispatch({
+      type: FILTER_PRODUCTS,
+    });
+    dispatch({
       type: SORT_PRODUCTS,
     });
-  }, [products, state.sort]);
+  }, [products, state.sort, state.filters]);
 
   const setView = (type) => {
     dispatch({
@@ -82,13 +85,13 @@ export const FilterProvider = ({ children }) => {
         value,
       },
     });
-    dispatch({
-      type: FILTER_PRODUCTS,
-      payload: {
-        name,
-        value,
-      },
-    });
+    // dispatch({
+    //   type: FILTER_PRODUCTS,
+    //   payload: {
+    //     name,
+    //     value,
+    //   },
+    // });
   };
 
   const clearFilters = () => {
