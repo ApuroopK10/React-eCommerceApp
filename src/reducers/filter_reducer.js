@@ -111,7 +111,11 @@ const filter_reducer = (state, action) => {
           );
           break;
         case "shipping":
-          temp_products = temp_products.filter((prod) => prod[filter] === true);
+          if (state.filters.shipping) {
+            temp_products = temp_products.filter(
+              (prod) => prod[filter] === true
+            );
+          }
           break;
         default:
           break;
