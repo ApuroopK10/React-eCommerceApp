@@ -46,12 +46,13 @@ const AddToCart = ({ product }) => {
           minusQuantity={reduceQuantity}
         />
       </div>
-      <button
+      <Link
+        to="/cart"
         className="btn"
         onClick={() => addToCart(id, activeColor, quantity, product)}
       >
         Add to Cart
-      </button>
+      </Link>
     </Wrapper>
   );
 };

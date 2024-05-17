@@ -38,14 +38,10 @@ const products_reducer = (state, action) => {
     return { ...state, single_product_loading: true };
   }
   if (action.type === GET_SINGLE_PRODUCT_SUCCESS) {
-    // const featured_products = action.payload.filter(
-    //   (product) => product.single_product === true
-    // );
     return {
       ...state,
       single_product_loading: false,
       single_product: action.payload,
-      // featured_products,
     };
   }
   if (action.type === GET_SINGLE_PRODUCT_ERROR) {
