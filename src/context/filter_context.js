@@ -85,13 +85,6 @@ export const FilterProvider = ({ children }) => {
         value,
       },
     });
-    // dispatch({
-    //   type: FILTER_PRODUCTS,
-    //   payload: {
-    //     name,
-    //     value,
-    //   },
-    // });
   };
 
   const clearFilters = () => {

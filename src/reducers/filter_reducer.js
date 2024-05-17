@@ -75,17 +75,50 @@ const filter_reducer = (state, action) => {
     };
   }
   if (action.type === FILTER_PRODUCTS) {
-    // const { name, value } = action.payload;
-    // let temp_products = [...state.all_products];
-    // // if (name === "text") {
-    // temp_products = temp_products.filter(
-    //   (prod) => prod[name].toLowerCase().indexOf(value.toLowerCase()) > -1
-    // );
-    // }
-    return {
-      ...state,
-      // filtered_products: temp_products,
-    };
+    const { all_products } = state;
+    let temp_products = [...all_products];
+    Object.keys(state.filters).forEach((filter) => {
+      switch (filter) {
+        case "text":
+          temp_products = temp_products.filter(
+            (prod) =>
+              prod.name
+                .toLowerCase()
+                .indexOf(state.filters[filter].toLowerCase()) > -1
+          );
+          break;
+        case "category":
+        case "company":
+          if (state.filters[filter] === "all") {
+            return;
+          }
+          temp_products = temp_products.filter(
+            (prod) =>
+              prod[filter].toLowerCase() === state.filters[filter].toLowerCase()
+          );
+          break;
+        case "color":
+          if (state.filters[filter] === "all") {
+            return;
+          }
+          temp_products = temp_products.filter(
+            (prod) => prod.colors.indexOf(state.filters[filter]) > -1
+          );
+          break;
+        case "price":
+          temp_products = temp_products.filter(
+            (prod) => prod.price <= state.filters[filter]
+          );
+          break;
+        case "shipping":
+          temp_products = temp_products.filter((prod) => prod[filter] === true);
+          break;
+        default:
+          break;
+      }
+    });
+
+    return { ...state, filtered_products: temp_products };
   }
   if (action.type === CLEAR_FILTERS) {
     return {
