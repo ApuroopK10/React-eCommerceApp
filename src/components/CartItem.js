@@ -8,8 +8,12 @@ const CartItem = ({ item }) => {
   const { removeItem, toggleQuantity } = useCartContext();
   const { image, name, color, price, quantity, id } = item;
 
-  const addQuantity = () => {};
-  const reduceQuantity = () => {};
+  const addQuantity = (id) => {
+    toggleQuantity(id, 1);
+  };
+  const reduceQuantity = (id) => {
+    toggleQuantity(id, -1);
+  };
   return (
     <Wrapper>
       <div className="title">
@@ -25,8 +29,8 @@ const CartItem = ({ item }) => {
       <h5 className="price">{formatPrice(price)}</h5>
       <AmountButtons
         quantity={quantity}
-        plusQuantity={addQuantity}
-        minusQuantity={reduceQuantity}
+        plusQuantity={() => addQuantity(id)}
+        minusQuantity={() => reduceQuantity(id)}
       />
       <h5 className="subtotal">{formatPrice(price * quantity)}</h5>
       <button
