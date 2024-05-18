@@ -58,6 +58,16 @@ const cart_reducer = (state, action) => {
     }
     return { ...state, cart: [...cartArray] };
   }
+
+  if (action.type === COUNT_CART_TOTALS) {
+    const cartTotals = state.cart
+      .map((item) => item.price * item.quantity)
+      .reduce((item1, item2) => (item1 += item2));
+    const totalLineItems = state.cart
+      .map((item) => 1 * item.quantity)
+      .reduce((item1, item2) => (item1 += item2));
+    return { ...state, count: totalLineItems, total: cartTotals };
+  }
   throw new Error(`No Matching "${action.type}" - action type`);
 };
 
