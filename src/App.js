@@ -40,7 +40,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/checkout",
-        element: <Checkout />,
+        element: (
+          <PrivateRoute path="/checkout">
+            <Checkout />
+          </PrivateRoute>
+        ),
       },
       {
         path: "*",
