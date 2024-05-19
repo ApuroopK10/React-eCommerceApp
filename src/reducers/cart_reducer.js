@@ -60,12 +60,16 @@ const cart_reducer = (state, action) => {
   }
 
   if (action.type === COUNT_CART_TOTALS) {
-    const cartTotals = state.cart
-      .map((item) => item.price * item.quantity)
-      .reduce((item1, item2) => (item1 += item2));
-    const totalLineItems = state.cart
-      .map((item) => 1 * item.quantity)
-      .reduce((item1, item2) => (item1 += item2));
+    let cartTotals = state.cart.map((item) => item.price * item.quantity);
+    if (cartTotals.length > 0) {
+      cartTotals = cartTotals.reduce((item1, item2) => (item1 += item2));
+    }
+    let totalLineItems = state.cart.map((item) => 1 * item.quantity);
+    if (totalLineItems.length > 0) {
+      totalLineItems = totalLineItems.reduce(
+        (item1, item2) => (item1 += item2)
+      );
+    }
     return { ...state, count: totalLineItems, total: cartTotals };
   }
   throw new Error(`No Matching "${action.type}" - action type`);

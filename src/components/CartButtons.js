@@ -9,14 +9,14 @@ import { useUserContext } from "../context/user_context";
 const CartButtons = () => {
   const { closeSideBar } = useProductsContext();
   const { loginWithRedirect, logout, myUser } = useUserContext();
-  const { count } = useCartContext();
+  const { cart, clearCart } = useCartContext();
   return (
     <Wrapper className="cart-btn-wrapper">
       <Link to="/cart" className="cart-btn" onClick={closeSideBar}>
         Cart
         <span className="cart-container">
           <FaShoppingCart />
-          <span className="cart-value">{count}</span>
+          <span className="cart-value">{cart.length}</span>
         </span>
       </Link>
       {!myUser ? (
@@ -27,11 +27,12 @@ const CartButtons = () => {
         <button
           type="button"
           className="auth-btn"
-          onClick={() =>
+          onClick={() => {
+            clearCart();
             logout({
               returnTo: window.location.origin,
-            })
-          }
+            });
+          }}
         >
           Logout <FaUserMinus />
         </button>
