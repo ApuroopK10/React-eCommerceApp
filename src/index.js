@@ -8,11 +8,9 @@ import { FilterProvider } from "./context/filter_context";
 import { CartProvider } from "./context/cart_context";
 import { UserProvider } from "./context/user_context";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { AuthWrapper } from "./pages";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
-// dev-idpag3kq3iiwvid8.us.auth0.com
-// uH2OLUdkHf3H5pGkipkCduyhrDPDhbo2
 
 root.render(
   <Auth0Provider
@@ -26,7 +24,9 @@ root.render(
       <ProductsProvider>
         <FilterProvider>
           <CartProvider>
-            <App />
+            <AuthWrapper>
+              <App />
+            </AuthWrapper>
           </CartProvider>
         </FilterProvider>
       </ProductsProvider>

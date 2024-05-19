@@ -7,6 +7,7 @@ import PrivateRoute from "./PrivateRoute";
 import Products from "./ProductsPage";
 import SingleProduct from "./SingleProductPage";
 import PageLayout from "./PageLayout";
+import AuthWrapper from "./AuthWrapper";
 
 export {
   Home,
@@ -18,4 +19,5 @@ export {
   Products,
   SingleProduct,
   PageLayout,
+  AuthWrapper,
 };
