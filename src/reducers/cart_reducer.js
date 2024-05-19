@@ -9,7 +9,7 @@ import {
 const cart_reducer = (state, action) => {
   if (action.type === ADD_TO_CART) {
     const { id, color, quantity, product } = action.payload;
-    const { cart, count, total } = state;
+    const { cart } = state;
     const itemExists = cart.find((item) => item.id === id + color);
     if (itemExists) {
       if (itemExists.quantity + quantity > itemExists.max) {

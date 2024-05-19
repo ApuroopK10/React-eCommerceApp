@@ -1,6 +1,5 @@
 import React from "react";
-import { Outlet, createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Navbar, Sidebar, Footer } from "./components";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
   Home,
   About,
