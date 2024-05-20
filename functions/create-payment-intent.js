@@ -4,7 +4,7 @@ const stripe = require("stripe")(process.env.REACT_APP_STRIPE_SECRET_KEY);
 
 exports.handler = async function (event, context) {
   if (event.body) {
-    const { cart, total, shipping_fee } = JSON.parse(event.body);
+    const { total, shipping_fee } = JSON.parse(event.body);
     const calculateOrderAmount = () => total + shipping_fee;
     try {
       const paymentIntent = await stripe.paymentIntents.create({
@@ -29,7 +29,6 @@ exports.handler = async function (event, context) {
         }),
       };
     } catch (error) {
-      console.log("mgerror--", error);
       return {
         statusCode: 500,
         body: JSON.stringify({ msg: error.message }),
