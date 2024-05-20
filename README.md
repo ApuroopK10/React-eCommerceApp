@@ -4,6 +4,7 @@ A React based eCommerce app designed using Styled Components, scaled up using Re
 Access the app at: https://ak10ecomm.netlify.app/ 
 
 **Stack:**
+
 React v18
 
 Styled Components
