@@ -10,6 +10,17 @@ exports.handler = async function (event, context) {
       const paymentIntent = await stripe.paymentIntents.create({
         amount: calculateOrderAmount(),
         currency: "usd",
+        description: "Home Space app",
+        shipping: {
+          name: "Home Space user",
+          address: {
+            line1: "510 Townsend St",
+            postal_code: "98140",
+            city: "San Francisco",
+            state: "CA",
+            country: "US",
+          },
+        },
       });
       return {
         statusCode: 200,

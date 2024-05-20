@@ -69,12 +69,48 @@ const CheckoutForm = () => {
     createPaymentIntent();
   }, []);
 
-  const handleChange = async (event) => {};
+  const handleChange = async (event) => {
+    setDisabled(event.empty);
+    setError(event.error ? event.error.message : "");
+  };
 
-  const handleSubmit = async (event) => {};
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setProcessing(true);
+
+    const payload = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+      },
+    });
+    if (payload.error) {
+      setError(`Payment failed ${payload.error.message}`);
+    } else {
+      setError(null);
+      setSucceeded(true);
+      clearCart();
+      setTimeout(() => {
+        navigate("/");
+      }, 10000);
+    }
+    setProcessing(false);
+  };
 
   return (
     <div>
+      {succeeded ? (
+        <article>
+          <h4>Thank you</h4>
+          <h4>Your payment was successful!</h4>
+          <h4>Redirecting to home page shortly</h4>
+        </article>
+      ) : (
+        <article>
+          <h4>Hello, {myUser && myUser.name}</h4>
+          <p>Your total is {formatPrice(shipping_fee + total)}</p>
+          <p>Test card number: 4242 4242 4242 4242</p>
+        </article>
+      )}
       <form id="payment-form" onSubmit={handleSubmit}>
         <CardElement
           id="card-element"
