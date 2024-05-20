@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 const CheckoutForm = () => {
-  const { cart, total_amount, shipping_fee, clearCart } = useCartContext();
+  const { cart, total, shipping_fee, clearCart } = useCartContext();
   const { myUser } = useUserContext();
   const navigate = useNavigate();
 
@@ -49,16 +49,19 @@ const CheckoutForm = () => {
   const createPaymentIntent = async () => {
     try {
       // Create PaymentIntent as soon as the page loads
-      const data = await axios.post(
+      const { data } = await axios.post(
         "/.netlify/functions/create-payment-intent",
-        JSON.stringify({ cart, total_amount, shipping_fee }),
+        JSON.stringify({ cart, total, shipping_fee }),
         {
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
-    } catch (error) {}
+      setClientSecret(data.clientSecret);
+    } catch (error) {
+      console.log(error.response);
+    }
     console.log("hello from stripe checkout");
   };
 
