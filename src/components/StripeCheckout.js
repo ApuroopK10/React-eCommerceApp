@@ -46,7 +46,19 @@ const CheckoutForm = () => {
     },
   };
 
-  const createPaymentIntent = () => {
+  const createPaymentIntent = async () => {
+    try {
+      // Create PaymentIntent as soon as the page loads
+      const data = await axios.post(
+        "/.netlify/functions/create-payment-intent",
+        JSON.stringify({ cart, total_amount, shipping_fee }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    } catch (error) {}
     console.log("hello from stripe checkout");
   };
 
@@ -83,7 +95,7 @@ const CheckoutForm = () => {
         )}
         {/* SHow success upon completion */}
         <p className={succeeded ? "result-message" : "result-message-hidden"}>
-          Payment succeeded, see the confirmation in{" "}
+          Payment succeeded, see the confirmation in
           <a href={`https://dashboard.stripe.com/test/payments`}>
             Stripe dashboard
           </a>
