@@ -5,8 +5,13 @@ Access the app at: https://ak10ecomm.netlify.app/
 
 **Stack:**
 React v18
+
 Styled Components
+
 Auth0 authentication
+
 Netlify functions 
+
 Stripe payment integrations
+
 Deployed to netlify
