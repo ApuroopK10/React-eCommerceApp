@@ -10,7 +10,7 @@ const CheckoutPage = () => {
   return (
     <main>
       <PageHero title="Checkout" />
-      <Wrapper className="page">
+      <Wrapper className="page section section-center">
         {cart.length === 0 ? (
           <div className="empty">
             <h2>Your cart is empty</h2>
@@ -32,6 +32,14 @@ const Wrapper = styled.div`
 
   .empty {
     text-align: center;
+  }
+
+  h2 {
+    margin-bottom: 1.5rem;
+  }
+
+  &.page {
+    justify-content: center;
   }
 `;
 export default CheckoutPage;
