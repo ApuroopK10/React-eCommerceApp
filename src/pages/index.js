@@ -8,6 +8,7 @@ import Products from "./ProductsPage";
 import SingleProduct from "./SingleProductPage";
 import PageLayout from "./PageLayout";
 import AuthWrapper from "./AuthWrapper";
+import Shipping from "./ShippingPage";
 
 export {
   Home,
@@ -20,4 +21,5 @@ export {
   SingleProduct,
   PageLayout,
   AuthWrapper,
+  Shipping,
 };

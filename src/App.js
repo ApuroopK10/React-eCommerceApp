@@ -10,6 +10,7 @@ import {
   Products,
   SingleProduct,
   PageLayout,
+  Shipping,
 } from "./pages";
 
 const appRouter = createBrowserRouter([
@@ -36,6 +37,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/products/:id",
         element: <SingleProduct />,
+      },
+      {
+        path: "/shipping",
+        element: <Shipping />,
       },
       {
         path: "/checkout",
