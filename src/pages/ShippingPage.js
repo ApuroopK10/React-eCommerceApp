@@ -20,6 +20,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-items: center;
+  flex-direction: column;
 
   .empty {
     text-align: center;
