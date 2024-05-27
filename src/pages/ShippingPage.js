@@ -3,6 +3,7 @@ import ShippingAddress from "../components/ShippingAddress";
 import BillingAddress from "../components/BillingAddress";
 import styled from "styled-components";
 import { PageHero } from "../components";
+import CartTotals from "../components/CartTotals";
 
 const ShippingPage = () => {
   return (
@@ -10,7 +11,8 @@ const ShippingPage = () => {
       <PageHero title="Shipping" />
       <Wrapper className="page section section-center">
         <ShippingAddress />
-        <BillingAddress />
+        <CartTotals />
+        {/* <BillingAddress /> */}
       </Wrapper>
     </main>
   );
@@ -18,9 +20,9 @@ const ShippingPage = () => {
 
 const Wrapper = styled.div`
   display: flex;
-  align-items: center;
+  align-items: baseline;
+  gap: 5rem;
   justify-items: center;
-  flex-direction: column;
 
   .empty {
     text-align: center;

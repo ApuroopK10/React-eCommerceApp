@@ -23,7 +23,7 @@ const CartContent = () => {
           Clear Cart
         </button>
       </div>
-      <CartTotals />
+      <CartTotals beginCheckout />
     </Wrapper>
   );
 };
