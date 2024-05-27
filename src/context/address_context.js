@@ -11,14 +11,14 @@ const AddressContext = createContext();
 
 export const AddressProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const addShippingAAddress = (address) => {
+  const addShippingAddress = (address) => {
     dispatch({
       type: ADD_SHIPPING_ADDRESS,
       payload: address,
     });
   };
   return (
-    <AddressContext.Provider value={{ ...state, addShippingAAddress }}>
+    <AddressContext.Provider value={{ ...state, addShippingAddress }}>
       {children}
     </AddressContext.Provider>
   );

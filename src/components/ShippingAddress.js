@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useAddressContext } from "../context/address_context";
+import { ADD_SHIPPING_ADDRESS } from "../actions";
 
 const schema = yup
   .object({
@@ -20,6 +22,7 @@ const schema = yup
   .required();
 
 const ShippingAddress = () => {
+  const { addShippingAddress } = useAddressContext();
   const Input = ({ label, register, name, forLabel, required }) => {
     return (
       <div className="field">
@@ -45,7 +48,7 @@ const ShippingAddress = () => {
     defaultValues: {
       firstName: "",
       lastName: "",
-      phone: "+1 ",
+      phone: "+1",
       address1: "",
       address2: "",
       city: "",
@@ -54,9 +57,8 @@ const ShippingAddress = () => {
     resolver: yupResolver(schema),
     mode: "all",
   });
-  console.log("errors", errors);
   const onSubmitForm = (data) => {
-    console.log("data", data);
+    addShippingAddress(data);
   };
   return (
     <Wrapper>
