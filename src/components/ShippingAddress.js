@@ -29,8 +29,9 @@ const ShippingAddress = () => {
         <input
           {...register(name)}
           type="text"
-          className="input"
+          className={`input ${errors[name] ? "error" : null}`}
           id={forLabel}
+          aria-invalid={errors[name] ? "true" : "false"}
         />
         {errors[name] && <span className="error">{errors[name].message}</span>}
       </div>
@@ -51,6 +52,7 @@ const ShippingAddress = () => {
       zipCode: "",
     },
     resolver: yupResolver(schema),
+    mode: "all",
   });
   console.log("errors", errors);
   const onSubmitForm = (data) => {
@@ -154,6 +156,9 @@ const Wrapper = styled.div`
     .error {
       color: red;
       font-size: 14px;
+    }
+    input.error {
+      border: 1px solid red;
     }
   }
 `;
