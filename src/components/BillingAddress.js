@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAddressContext } from "../context/address_context";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup
   .object({
@@ -20,7 +21,8 @@ const schema = yup
   })
   .required();
 const BillingAddress = () => {
-  const { addBillingAddress } = useAddressContext();
+  const { addBillingAddress, shippingAddress } = useAddressContext();
+  const navigate = useNavigate();
   const Input = ({ label, register, name, forLabel, required }) => {
     return (
       <div className="field">
@@ -57,11 +59,17 @@ const BillingAddress = () => {
   });
   const onSubmitForm = (data) => {
     addBillingAddress(data);
+    navigate("/checkout");
   };
   const [addressType, setAddressType] = useState("sameBilling");
 
   const handleAddressChange = (event) => {
     setAddressType(event.target.value);
+  };
+
+  const copyShippingToBilling = () => {
+    addBillingAddress({ ...shippingAddress });
+    navigate("/checkout");
   };
 
   return (
@@ -158,7 +166,7 @@ const BillingAddress = () => {
           </form>
         </Wrapper>
       ) : (
-        <button type="button" className="btn">
+        <button type="button" className="btn" onClick={copyShippingToBilling}>
           Continue to Pay
         </button>
       )}
