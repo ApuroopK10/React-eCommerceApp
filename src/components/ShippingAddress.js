@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAddressContext } from "../context/address_context";
-import { ADD_SHIPPING_ADDRESS } from "../actions";
 
 const schema = yup
   .object({
@@ -123,7 +122,7 @@ const ShippingAddress = () => {
         />
         <div className="submit">
           <button type="submit" className="btn">
-            Add Shipping Address
+            Continue to Billing
           </button>
         </div>
       </form>

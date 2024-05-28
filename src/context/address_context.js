@@ -17,8 +17,16 @@ export const AddressProvider = ({ children }) => {
       payload: address,
     });
   };
+  const addBillingAddress = (address) => {
+    dispatch({
+      type: ADD_BILLING_ADDRESS,
+      payload: address,
+    });
+  };
   return (
-    <AddressContext.Provider value={{ ...state, addShippingAddress }}>
+    <AddressContext.Provider
+      value={{ ...state, addShippingAddress, addBillingAddress }}
+    >
       {children}
     </AddressContext.Provider>
   );

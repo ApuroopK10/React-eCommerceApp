@@ -4,15 +4,17 @@ import BillingAddress from "../components/BillingAddress";
 import styled from "styled-components";
 import { PageHero } from "../components";
 import CartTotals from "../components/CartTotals";
+import { useAddressContext } from "../context/address_context";
 
 const ShippingPage = () => {
+  const { shippingAddress } = useAddressContext();
+  const isShippingAdded = Object.keys(shippingAddress).length > 0;
   return (
     <main>
       <PageHero title="Shipping" />
       <Wrapper className="page section section-center">
-        <ShippingAddress />
+        {!isShippingAdded ? <ShippingAddress /> : <BillingAddress />}
         <CartTotals />
-        {/* <BillingAddress /> */}
       </Wrapper>
     </main>
   );
