@@ -12,6 +12,7 @@ import { useCartContext } from "../context/cart_context";
 import { useUserContext } from "../context/user_context";
 import { formatPrice } from "../utils/helpers";
 import { useNavigate } from "react-router-dom";
+import AddressSummary from "./AddressSummary";
 
 const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 const CheckoutForm = () => {
@@ -148,6 +149,7 @@ const CheckoutForm = () => {
 const StripeCheckout = () => {
   return (
     <Wrapper>
+      <AddressSummary />
       <Elements stripe={promise}>
         <CheckoutForm />
       </Elements>
